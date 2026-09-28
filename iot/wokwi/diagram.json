@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "author": "Smart Charge",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 120,
+      "left": 120,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "sensor01",
+      "top": -120,
+      "left": -130,
+      "attrs": {
+        "distance": "100"
+      }
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "sensor02",
+      "top": -120,
+      "left": 105,
+      "attrs": {
+        "distance": "100"
+      }
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "sensor03",
+      "top": -120,
+      "left": 340,
+      "attrs": {
+        "distance": "100"
+      }
+    }
+  ],
+  "connections": [
+    ["sensor01:VCC", "esp:VIN", "red", []],
+    ["sensor01:GND", "esp:GND.1", "black", []],
+    ["sensor01:TRIG", "esp:D5", "yellow", []],
+    ["sensor01:ECHO", "esp:D18", "green", []],
+
+    ["sensor02:VCC", "esp:VIN", "red", []],
+    ["sensor02:GND", "esp:GND.1", "black", []],
+    ["sensor02:TRIG", "esp:D19", "yellow", []],
+    ["sensor02:ECHO", "esp:D21", "green", []],
+
+    ["sensor03:VCC", "esp:VIN", "red", []],
+    ["sensor03:GND", "esp:GND.1", "black", []],
+    ["sensor03:TRIG", "esp:D22", "yellow", []],
+    ["sensor03:ECHO", "esp:D23", "green", []]
+  ],
+  "dependencies": {}
+}

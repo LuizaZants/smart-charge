@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Charge</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+    <header class="topo">
+
+        <div class="marca">
+
+            <div class="logo">⚡</div>
+
+            <div>
+                <h1>SMART CHARGE</h1>
+                <p>Monitoramento inteligente de estações de recarga</p>
+            </div>
+
+        </div>
+
+        <div class="sistema-online">
+            <span class="ponto-online"></span>
+            Sistema online
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+        <section class="titulo-pagina">
+
+            <p class="subtitulo">
+                MONITORAMENTO EM TEMPO REAL
+            </p>
+
+            <h2>Estações de carregamento</h2>
+
+            <p>
+                Acompanhe a disponibilidade dos pontos de recarga.
+            </p>
+
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- ESTAÇÕES -->
+        <!-- ============================= -->
+
+        <section class="estacoes">
+
+
+            <!-- PONTO 01 -->
+
+            <div class="card-estacao">
+
+                <div class="card-topo">
+
+                    <div>
+                        <span class="identificador">
+                            PONTO DE RECARGA
+                        </span>
+
+                        <h3>Estação 01</h3>
+                    </div>
+
+                    <span class="numero-estacao">
+                        01
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="area-status-01"
+                    class="area-status carregando"
+                >
+
+                    <div class="icone-status">
+                        ⚡
+                    </div>
+
+                    <span class="status-label">
+                        STATUS ATUAL
+                    </span>
+
+                    <strong id="status-01">
+                        CARREGANDO...
+                    </strong>
+
+                    <p id="descricao-status-01">
+                        Consultando a estação...
+                    </p>
+
+                </div>
+
+
+                <div class="ultima-atualizacao">
+
+                    <span>
+                        Última atualização
+                    </span>
+
+                    <strong id="horario-01">
+                        --:--:--
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- PONTO 02 -->
+
+            <div class="card-estacao">
+
+                <div class="card-topo">
+
+                    <div>
+                        <span class="identificador">
+                            PONTO DE RECARGA
+                        </span>
+
+                        <h3>Estação 02</h3>
+                    </div>
+
+                    <span class="numero-estacao">
+                        02
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="area-status-02"
+                    class="area-status carregando"
+                >
+
+                    <div class="icone-status">
+                        ⚡
+                    </div>
+
+                    <span class="status-label">
+                        STATUS ATUAL
+                    </span>
+
+                    <strong id="status-02">
+                        CARREGANDO...
+                    </strong>
+
+                    <p id="descricao-status-02">
+                        Consultando a estação...
+                    </p>
+
+                </div>
+
+
+                <div class="ultima-atualizacao">
+
+                    <span>
+                        Última atualização
+                    </span>
+
+                    <strong id="horario-02">
+                        --:--:--
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- PONTO 03 -->
+
+            <div class="card-estacao">
+
+                <div class="card-topo">
+
+                    <div>
+                        <span class="identificador">
+                            PONTO DE RECARGA
+                        </span>
+
+                        <h3>Estação 03</h3>
+                    </div>
+
+                    <span class="numero-estacao">
+                        03
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="area-status-03"
+                    class="area-status carregando"
+                >
+
+                    <div class="icone-status">
+                        ⚡
+                    </div>
+
+                    <span class="status-label">
+                        STATUS ATUAL
+                    </span>
+
+                    <strong id="status-03">
+                        CARREGANDO...
+                    </strong>
+
+                    <p id="descricao-status-03">
+                        Consultando a estação...
+                    </p>
+
+                </div>
+
+
+                <div class="ultima-atualizacao">
+
+                    <span>
+                        Última atualização
+                    </span>
+
+                    <strong id="horario-03">
+                        --:--:--
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- HISTÓRICO -->
+        <!-- ============================= -->
+
+        <section class="card-historico historico-geral">
+
+            <div class="historico-topo">
+
+                <div>
+
+                    <span class="identificador">
+                        ATIVIDADE
+                    </span>
+
+                    <h3>
+                        Histórico recente
+                    </h3>
+
+                </div>
+
+                <span class="icone-historico">
+                    ↻
+                </span>
+
+            </div>
+
+
+            <div
+                id="historico"
+                class="lista-historico"
+            >
+
+                <p class="carregando-historico">
+                    Carregando histórico...
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <span>
+            ⚡ Smart Charge
+        </span>
+
+        <p>
+            Sistema inteligente de monitoramento
+            de pontos de recarga
+        </p>
+
+    </footer>
+
+
+<script>
+
+
+// =============================
+// HORÁRIO
+// =============================
+
+function formatarHorario(dataISO) {
+
+    if (!dataISO) {
+        return "--:--:--";
+    }
+
+    const data = new Date(dataISO);
+
+    return data.toLocaleTimeString(
+        "pt-BR",
+        {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+        }
+    );
+}
+
+
+// =============================
+// ATUALIZA UM PONTO
+// =============================
+
+function atualizarPonto(dados) {
+
+    const ponto = dados.ponto;
+
+    const areaStatus =
+        document.getElementById(
+            `area-status-${ponto}`
+        );
+
+    const status =
+        document.getElementById(
+            `status-${ponto}`
+        );
+
+    const descricao =
+        document.getElementById(
+            `descricao-status-${ponto}`
+        );
+
+    const horario =
+        document.getElementById(
+            `horario-${ponto}`
+        );
+
+
+    if (
+        !areaStatus ||
+        !status ||
+        !descricao ||
+        !horario
+    ) {
+        return;
+    }
+
+
+    areaStatus.classList.remove(
+        "disponivel",
+        "ocupado",
+        "carregando"
+    );
+
+
+    if (dados.status === "DISPONIVEL") {
+
+        status.textContent =
+            "DISPONÍVEL";
+
+        descricao.textContent =
+            "Ponto livre para carregamento.";
+
+        areaStatus.classList.add(
+            "disponivel"
+        );
+
+    }
+
+    else if (dados.status === "EM USO") {
+
+        status.textContent =
+            "EM USO";
+
+        descricao.textContent =
+            "Veículo detectado no ponto de recarga.";
+
+        areaStatus.classList.add(
+            "ocupado"
+        );
+
+    }
+
+    else {
+
+        status.textContent =
+            "SEM DADOS";
+
+        descricao.textContent =
+            "Nenhuma informação disponível.";
+
+        areaStatus.classList.add(
+            "carregando"
+        );
+
+    }
+
+
+    horario.textContent =
+        formatarHorario(
+            dados.horario
+        );
+}
+
+
+// =============================
+// STATUS DOS 3 PONTOS
+// =============================
+
+async function atualizarStatus() {
+
+    try {
+
+        const resposta =
+            await fetch("/api/status");
+
+        const dados =
+            await resposta.json();
+
+
+        if (!Array.isArray(dados)) {
+
+            console.error(
+                "Formato inesperado da API:",
+                dados
+            );
+
+            return;
+        }
+
+
+        dados.forEach(
+            ponto => atualizarPonto(ponto)
+        );
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            "Erro ao consultar status:",
+            erro
+        );
+
+    }
+}
+
+
+// =============================
+// HISTÓRICO
+// =============================
+
+async function atualizarHistorico() {
+
+    try {
+
+        const resposta =
+            await fetch("/api/historico");
+
+        const dados =
+            await resposta.json();
+
+        const historico =
+            document.getElementById(
+                "historico"
+            );
+
+        historico.innerHTML = "";
+
+
+        if (dados.length === 0) {
+
+            historico.innerHTML =
+                '<p class="carregando-historico">Nenhum registro encontrado.</p>';
+
+            return;
+        }
+
+
+        dados.forEach(item => {
+
+            const registro =
+                document.createElement(
+                    "div"
+                );
+
+            registro.className =
+                "item-historico";
+
+
+            const classe =
+                item.status === "EM USO"
+                    ? "vermelho"
+                    : "verde";
+
+
+            const texto =
+                item.status === "EM USO"
+                    ? "Em uso"
+                    : "Disponível";
+
+
+            registro.innerHTML = `
+
+                <div class="evento">
+
+                    <span
+                        class="indicador ${classe}"
+                    >
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            ${texto}
+                        </strong>
+
+                        <p>
+                            Ponto ${item.ponto}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <span class="hora-evento">
+
+                    ${formatarHorario(
+                        item.horario
+                    )}
+
+                </span>
+
+            `;
+
+
+            historico.appendChild(
+                registro
+            );
+
+        });
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            "Erro ao consultar histórico:",
+            erro
+        );
+
+    }
+}
+
+
+// =============================
+// DASHBOARD
+// =============================
+
+async function atualizarDashboard() {
+
+    await Promise.all([
+        atualizarStatus(),
+        atualizarHistorico()
+    ]);
+
+}
+
+
+// Primeira atualização
+atualizarDashboard();
+
+
+// Atualização automática
+setInterval(
+    atualizarDashboard,
+    3000
+);
+
+
+</script>
+
+</body>
+
+</html>
